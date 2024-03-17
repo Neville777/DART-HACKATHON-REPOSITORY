@@ -1,42 +1,38 @@
-import 'dart:io'; // Import the dart:io library to use input and output operations
+import 'dart:io';
 
 void main() {
-  bool continueProgram =
-      true; // Initialize a boolean variable to control program execution
+  bool continueProgram = true; // Variable to control program execution
 
-  // Run the program until the user decides to exit
   while (continueProgram) {
-    // Ask for user input
-    stdout.write("Enter your marks or type 'exit' to quit: ");
+    // Continuously runs until continueProgram is false
+    stdout.write(
+        "Enter your marks or type 'exit' to quit: "); // Prompt user for input
     String input = stdin.readLineSync()!; // Read user input from the console
 
-    if (input.toLowerCase() == 'exit') {
-      continueProgram =
-          false; // If user input is 'exit', set continueProgram to false to exit the loop
-    } else {
-      try {
-        int marks = int.parse(input); // Parse user input to an integer
+    continueProgram = input.toLowerCase() !=
+        'exit'; // Check if the user wants to continue or exit
+    if (!continueProgram)
+      break; // Break out of the loop if the user wants to exit
 
-        // Check if marks are within the valid range
-        if (marks >= 0 && marks <= 100) {
-          // Determine grade based on marks
-          if (marks > 85) {
-            print("Grade: Excellent");
-          } else if (marks >= 75) {
-            print("Grade: Very Good");
-          } else if (marks >= 65) {
-            print("Grade: Good");
-          } else {
-            print("Grade: Average");
-          }
-        } else {
-          print(
-              "Invalid marks entered. Please enter a number between 0 and 100.");
-        }
-      } catch (e) {
-        print(
-            "Invalid input. Please enter a valid integer or type 'exit' to quit.");
-      }
+    try {
+      int marks = int.parse(input); // Convert the input string to an integer
+
+      // Determine grade based on marks using nested ternary operators
+      String grade = marks >= 0 && marks <= 100
+          ? marks > 85
+              ? 'Excellent' // If marks are greater than 85
+              : marks >= 75
+                  ? 'Very Good' // If marks are between 75 and 85
+                  : marks >= 65
+                      ? 'Good' // If marks are between 65 and 75
+                      : 'Average' // If marks are below 65
+          : 'Invalid marks entered. Please enter a number between 0 and 100.'; // If marks are outside the range
+
+      print("Grade: $grade"); // Print the calculated grade
+    } catch (e) {
+      // Handle invalid input or parsing errors
+      print(
+          "Invalid input. Please enter a valid number or type 'exit' to quit.");
     }
   }
 }
