@@ -14,7 +14,7 @@ void main() {
 
     // Perform mathematical operations and display results
     print("Divide: ${num1 / num2}");
-    print("Modulos: ${num1 % num2}");
+    print("Modulus: ${num1 % num2}");
 
     // Prompt the user to continue or quit
     stdout.write("Enter 'done' to quit or press any key to continue: ");
